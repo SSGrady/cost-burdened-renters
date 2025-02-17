@@ -33,6 +33,10 @@ def normalize(value:float, min_val:float, max_val:float, lower_is_better:bool) -
     If lower_is_better is False, then higher values are better.
     '''
     if lower_is_better:
-        return (max_val - value) / (max_val - min_val)
+        normalized = (max_val - value) / (max_val - min_val)
     else:
-        return (value - min_val) / (max_val - min_val)
+        normalized =  (value - min_val) / (max_val - min_val)
+    
+    # clamp the value to [0, 1] range and scale to [0, 10]
+    normalized = max(0.0, min(normalized, 1.0))
+    return normalized * 10
